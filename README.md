@@ -1,8 +1,14 @@
-# Getting Started with Create React App
+# React 通用后台管理项目
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+如题，项目使用 [Create React App](https://github.com/facebook/create-react-app)创建。
+## 开发环境
+- node: v18.20.3
+- npm: 10.7.0
 
-## Available Scripts
+## 项目启动
+1. npm install
+2. npm start
+<!-- ## Available Scripts
 
 In the project directory, you can run:
 
@@ -67,4 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
