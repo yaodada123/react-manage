@@ -16,8 +16,8 @@ export default function Main() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
-    <div>
-      <Layout className="main-container">
+    <div >
+      <Layout className="main-container" style={{height:'100vh'}}>
         <CommonAside />
         <Layout>
           <Header
