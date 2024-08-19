@@ -38,8 +38,8 @@ const items = [
     ),
   },
 ];
-const ConmmonHeader = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const ConmmonHeader = ({collapsed}) => {
+  // const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -55,7 +55,7 @@ const ConmmonHeader = () => {
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => {console.log(collapsed);}}
         style={{
           fontSize: "16px",
           width: 64,

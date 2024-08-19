@@ -10,9 +10,11 @@ import {
 import { Button, Layout, Menu, theme } from "antd";
 import CommonAside from "../components/commonAside/index"
 import ConmmonHeader from "../components/commonHeader";
+import { useSelector, useDispatch } from 'react-redux'
 const { Header, Sider, Content } = Layout;
 export default function Main() {
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
+  const collapsed = useSelector((state) => state.tabMenu.isCollapsed)
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -21,7 +23,7 @@ export default function Main() {
       <Layout className="main-container" style={{height:'100vh'}}>
         <CommonAside />
         <Layout>
-          <ConmmonHeader />
+          <ConmmonHeader collapsed={collapsed} />
           <Content
             style={{
               margin: "24px 16px",
