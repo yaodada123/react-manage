@@ -11,6 +11,8 @@ import {
 import { AntDesignOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
 import "./index.css";
+import { useSelector, useDispatch } from 'react-redux'
+import {changeCollapsed} from "../../store/reducers/tab";
 const { Header, Sider, Content } = Layout;
 const items = [
   {
@@ -43,6 +45,11 @@ const ConmmonHeader = ({collapsed}) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const dispatch = useDispatch()
+  const setCollapsed = () => {
+    console.log(collapsed);
+    dispatch(changeCollapsed())
+  }
   return (
     <Header
       style={{
@@ -55,7 +62,7 @@ const ConmmonHeader = ({collapsed}) => {
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => {console.log(collapsed);}}
+        onClick={() => {setCollapsed()}}
         style={{
           fontSize: "16px",
           width: 64,

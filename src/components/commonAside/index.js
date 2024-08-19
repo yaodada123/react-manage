@@ -23,12 +23,12 @@ const items = MenuConfig.map((item) => {
   return child;
 })
 
-export default function CommonAside() {
-  const [collapsed, setCollapsed] = useState(false);
-
+export default function CommonAside({collapsed}) {
+  // const [collapsed, setCollapsed] = useState(false);
+  console.log(collapsed, 'CommonAside');
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      <h3 className="app-name">通用后台管理项目</h3>
+      <h3 className="app-name">{ collapsed ? '后台':'通用后台管理项目' }</h3>
       <Menu
         theme="dark"
         mode="inline"

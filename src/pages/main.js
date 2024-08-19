@@ -21,7 +21,7 @@ export default function Main() {
   return (
     <div >
       <Layout className="main-container" style={{height:'100vh'}}>
-        <CommonAside />
+        <CommonAside collapsed={collapsed} />
         <Layout>
           <ConmmonHeader collapsed={collapsed} />
           <Content
