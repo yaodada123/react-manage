@@ -33,7 +33,7 @@ export default function Main() {
               borderRadius: borderRadiusLG,
             }}
           >
-            Content
+            {/* Content */}
             <Outlet />
           </Content>
         </Layout>
