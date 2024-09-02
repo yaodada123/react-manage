@@ -1,14 +1,35 @@
 import { Col, Row, Card, Table } from "antd";
 import "./home.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getData } from "../../api";
 const userImg = require("../../assets/images/user.png")
 export default function Home() {
+  const [tableData, setTableData] = useState([]);
   useEffect(() => {
-    getData().then((res) => {
-      console.log(res);
+    getData().then(({data}) => {
+      console.log(data);
+      setTableData(data.data.tableData)
     })
   }, [])
+  // 行头数据展示
+  const columns = [
+    {
+      title: '课程',
+      dataIndex: 'name'
+    },
+    {
+      title: '今日购买',
+      dataIndex: 'todayBuy'
+    },
+    {
+      title: '本月购买',
+      dataIndex: 'monthBuy'
+    },
+    {
+      title: '总购买',
+      dataIndex: 'totalBuy'
+    }
+  ]
   return (
     <Row className="home">
       <Col span={8}>
@@ -32,9 +53,9 @@ export default function Home() {
         <Card style={{ marginTop: "20px" }} hoverable>
           <Table
             rowKey={"name"}
-            // columns={columns}
-            // dataSource={tableData}
-            // pagination={false}
+            columns={columns}
+            dataSource={tableData}
+            pagination={false}
           />
         </Card>
       </Col>
