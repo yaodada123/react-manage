@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import * as echarts from "echarts";
 
 const axisOption = {
@@ -35,7 +35,7 @@ const axisOption = {
   ],
   color: ["#2ec7c9", "#b6a2de", "#5ab1ef", "#ffb980", "#d87a80", "#8d98b3"],
   series: [],
-}
+};
 
 const normalOption = {
   tooltip: {
@@ -51,6 +51,28 @@ const normalOption = {
     "#3ed1cf",
   ],
   series: [],
-}
+};
 
+// 封装Echarts组件
+const MyECharts = ({ style, chartData, isAxisChart = true }) => {
+  const echartRef = useRef();
+  const echartObj = useRef();
+  let option;
+  useEffect(() => {
+    if (!echartObj.current) {
+      echartObj.current = echarts.init(echartRef.current);
+    }
+    if (isAxisChart) {
+      axisOption.xAxis.data = chartData.xData;
+      axisOption.series = chartData.series;
+      option = axisOption;
+    } else {
+      normalOption.series = chartData.series;
+      option = normalOption;
+    }
+    echartObj.current.setOption(option);
+  }, [chartData]);
+  return <div style={style} ref={echartRef}></div>;
+};
 
+export default MyECharts;
