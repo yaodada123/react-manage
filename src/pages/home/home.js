@@ -54,12 +54,11 @@ export default function Home() {
   useEffect(() => {
     getData().then(({ data }) => {
       console.log(data);
-      const {tableData, orderData} = data.data;
+      const {tableData, orderData, userData, videoData} = data.data;
       setTableData(tableData);
 
       // 封装echarts数据
       const order = orderData;
-      console.log(order, '111');
       const xData = order.date; // 形成横坐标数据
       const series = [];
       const keyArray = Object.keys(order.data[0]);
@@ -69,35 +68,39 @@ export default function Home() {
           type: 'line'
         })
       })
+
+
       setEchartData({
         order: {
           xData,
           series
+        },
+        user: {
+          xData: userData.map(item => item.date),
+          series: [
+            {
+              data: userData.map(item => item.new),
+              type: 'bar'
+            }, 
+            {
+              data: userData.map(item => item.active),
+              type: 'bar'
+            }
+          ]
+        },
+        video: {
+          series: [
+            {
+              type: 'pie',
+              data: videoData
+            }
+          ]
         }
+
       })
 
     });
 
-    // 基于准备好的dom，初始化echarts实例
-    // var myChart = echarts.init(document.getElementById("main"));
-    // // 绘制图表
-    // myChart.setOption({
-    //   title: {
-    //     text: "ECharts 入门示例",
-    //   },
-    //   tooltip: {},
-    //   xAxis: {
-    //     data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-    //   },
-    //   yAxis: {},
-    //   series: [
-    //     {
-    //       name: "销量",
-    //       type: "bar",
-    //       data: [5, 20, 36, 10, 10, 20],
-    //     },
-    //   ],
-    // });
   }, []);
   // 行头数据展示
   const columns = [
@@ -165,6 +168,10 @@ export default function Home() {
         </div>
         {/* <div id="main" style={{height: '300px'}}></div> */}
         {echartData.order && <MyECharts style={{height: '280px'}} chartData={echartData.order} />}
+        <div className="graph">
+          { echartData.user && <MyECharts chartData={echartData.user} style={{ width: '50%', height: '240px' }} /> }
+          { echartData.video && <MyECharts chartData={echartData.video} isAxisChart={false} style={{ width: '50%', height: '260px' }} /> }
+        </div>
       </Col>
     </Row>
   );
