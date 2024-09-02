@@ -2,6 +2,7 @@ import * as Icon from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
 import MenuConfig from "../../config";
+import {useNavigate} from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 const iconToElement = (name) => React.createElement(Icon[name]);
@@ -25,7 +26,12 @@ const items = MenuConfig.map((item) => {
 
 export default function CommonAside({collapsed}) {
   // const [collapsed, setCollapsed] = useState(false);
-  console.log(collapsed, 'CommonAside');
+  // console.log(collapsed, 'CommonAside');
+  const navigate = useNavigate();
+  const menuClick = (e) => {
+    navigate(e.key)
+  }
+
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <h3 className="app-name">{ collapsed ? '后台':'通用后台管理项目' }</h3>
@@ -34,6 +40,7 @@ export default function CommonAside({collapsed}) {
         mode="inline"
         defaultSelectedKeys={["1"]}
         items={items}
+        onClick={menuClick}
       />
     </Sider>
   );
