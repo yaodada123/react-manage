@@ -1,8 +1,49 @@
 import { Col, Row, Card, Table } from "antd";
+import * as Icon from "@ant-design/icons";
 import "./home.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import { getData } from "../../api";
 const userImg = require("../../assets/images/user.png")
+
+const countData = [
+  {
+    "name": "今日支付订单",
+    "value": 1234,
+    "icon": "CheckCircleOutlined",
+    "color": "#2ec7c9"
+  },
+  {
+    "name": "今日收藏订单",
+    "value": 3421,
+    "icon": "ClockCircleOutlined",
+    "color": "#ffb980"
+  },
+  {
+    "name": "今日未支付订单",
+    "value": 1234,
+    "icon": "CloseCircleOutlined",
+    "color": "#5ab1ef"
+  },
+  {
+    "name": "本月支付订单",
+    "value": 1234,
+    "icon": "CheckCircleOutlined",
+    "color": "#2ec7c9"
+  },
+  {
+    "name": "本月收藏订单",
+    "value": 3421,
+    "icon": "ClockCircleOutlined",
+    "color": "#ffb980"
+  },
+  {
+    "name": "本月未支付订单",
+    "value": 1234,
+    "icon": "CloseCircleOutlined",
+    "color": "#5ab1ef"
+  }
+]
+const iconToElement = (name) => React.createElement(Icon[name]);
 export default function Home() {
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
@@ -58,6 +99,25 @@ export default function Home() {
             pagination={false}
           />
         </Card>
+      </Col>
+      <Col style={{ marginTop: '20px' }} span={16}>
+        <div className="num">
+          {
+            countData.map((item, index) => {
+              return (
+                <Card key={index}>
+                    <div className="icon-box" style={{background: item.color}}>
+                      {iconToElement(item.icon)}
+                    </div>
+                    <div className="detail">
+                        <p className="num">￥{item.value}</p>
+                        <p className="txt">{item.name}</p>
+                    </div>
+                </Card>
+              )
+            })
+          }
+        </div>
       </Col>
     </Row>
   );
