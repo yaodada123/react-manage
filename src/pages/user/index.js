@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import {Button, Form, Input} from 'antd';
-import './user.css'
+import './user.css';
+import { getUser } from '../../api';
 
 export default function User() {
   const handleClick = () => {
@@ -9,6 +11,17 @@ export default function User() {
   const handleSearch = (e) => {
     console.log(e);
   }
+
+  const getUserData = () => {
+    getUser().then((res) => {
+      console.log(res, '这是获取的res的数据');
+    })
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, []);
+
 
   return (
     <div className="user">

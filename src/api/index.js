@@ -14,3 +14,10 @@ export const getData = () => {
       method: 'get'
   })
 }
+
+export const getUser = () => {
+    return axios.request({
+        url: '/user/getUser',
+        method: 'get'
+    })
+}
