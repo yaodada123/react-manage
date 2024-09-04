@@ -1,6 +1,8 @@
 .home {
     /* overflow: hidden; */
     background-color: #fff;
+    /* background-color: #c01b1b; */
+    /* height: 100% !important; */
 }
 .home .user {
     display: flex;

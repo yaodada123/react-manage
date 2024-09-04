@@ -23,7 +23,7 @@ export default function Main() {
   } = theme.useToken();
   return (
     <div >
-      <Layout className="main-container" style={{height:'100vh'}}>
+      <Layout className="main-container">
         <CommonAside collapsed={collapsed} />
         <Layout>
           <ConmmonHeader collapsed={collapsed} />
