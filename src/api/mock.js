@@ -7,3 +7,5 @@ Mock.mock(/user\/getUser/, userApi.getUserList);
 Mock.mock(/user\/add/, 'post', userApi.createUser)
 Mock.mock(/user\/edit/, 'post', userApi.updateUser)
 
+Mock.mock(/user\/del/, 'post', userApi.deleteUser)
+

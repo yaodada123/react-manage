@@ -37,3 +37,11 @@ export const editUser = (data) => {
         data
     })
 }
+
+export const deleteUser = (data) => {
+    return axios.request({
+        url: '/user/del',
+        method: 'post',
+        data
+    })
+}

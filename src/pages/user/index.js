@@ -11,7 +11,7 @@ import {
   Popconfirm
 } from 'antd'
 import "./user.css";
-import { getUser, addUser, editUser, } from "../../api";
+import { getUser, addUser, editUser, deleteUser } from "../../api";
 import dayjs from 'dayjs';
 
 export default function User() {
@@ -29,7 +29,6 @@ export default function User() {
   const handleOk = () => {
     // console.log(form);
     form.validateFields().then((val) => {
-
       // console.log(val, '这是表单的值');
       // 日期数据处理
       val.birth = dayjs(val.birth).format('YYYY-MM-DD');
@@ -46,7 +45,8 @@ export default function User() {
           getUserData()
         })
       }
-
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
@@ -120,21 +120,43 @@ export default function User() {
     // console.log(type,"这是type类型");
   };
 
-  const handleSearch = (e) => {
+  const [searchForm] = Form.useForm() 
+  const handleSearch = async (e) => {
     // console.log(e, "这是获取的搜索框数据");
     setListData({
       name: e.keyword,
-    });
+    })
+    
   };
+  useEffect(() => { // 用于实现搜索功能
+    // console.log(listData);
+    if(listData.name !== "") {
+      console.log(listData, "搜索框的数据");
+      const newTabelData = tableData.filter((item) =>{
+        return item.name === listData.name
+      })
+      console.log(newTabelData);
+      // console.log(tableData, "这是目前的数据");
+      setTableData(newTabelData);
+    }
+	  
+    // console.log('执行了');
+  }, [listData])
 
-  const handleDelete = () => {};
+
+
+  const handleDelete = ({id}) => {
+    deleteUser({id}).then(() => {
+      getUserData();
+    })
+  };
 
   const handleCancel = () => {
     setIsModalOpen(false);
     form.resetFields();
   };
 
-  const getUserData = (listData) => {
+  const getUserData = () => {
     getUser(listData).then(({ data }) => {
       // console.log(data.list, "data");
       setTableData(data.list);
@@ -142,8 +164,8 @@ export default function User() {
   };
 
   useEffect(() => {
-    getUserData(listData);
-  }, [listData]);
+    getUserData();
+  }, []);
 
   return (
     <div className="user">
@@ -152,7 +174,7 @@ export default function User() {
           +新增
         </Button>
         <Form
-          // form={searchForm}
+          form={searchForm}
           layout="inline"
           onFinish={handleSearch}
         >
