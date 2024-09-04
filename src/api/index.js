@@ -21,3 +21,19 @@ export const getUser = () => {
         method: 'get'
     })
 }
+
+export const addUser = (data) => {
+    return axios.request({
+        url: '/user/add',
+        method: 'post',
+        data
+    })
+}
+
+export const editUser = (data) => {
+    return axios.request({
+        url: '/user/edit',
+        method: 'post',
+        data
+    })
+}

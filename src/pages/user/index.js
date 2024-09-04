@@ -11,7 +11,8 @@ import {
   Popconfirm
 } from 'antd'
 import "./user.css";
-import { getUser } from "../../api";
+import { getUser, addUser, editUser, } from "../../api";
+import dayjs from 'dayjs';
 
 export default function User() {
   const [listData, setListData] = useState({
@@ -25,7 +26,29 @@ export default function User() {
   const [modalType, setModalType] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOk = () => {}
+  const handleOk = () => {
+    // console.log(form);
+    form.validateFields().then((val) => {
+
+      // console.log(val, '这是表单的值');
+      // 日期数据处理
+      val.birth = dayjs(val.birth).format('YYYY-MM-DD');
+      if (modalType) { // 编辑
+        editUser(val).then(() => {
+          // 关闭弹窗
+          handleCancel()
+          getUserData()
+        })
+      } else { // 新增
+        addUser(val).then(() => {
+          // 关闭弹窗
+          handleCancel()
+          getUserData()
+        })
+      }
+
+    })
+  }
 
   // 表格结构配置
   const columns = [
@@ -80,12 +103,19 @@ export default function User() {
     },
   ];
 
-  const handleClick = (type) => {
+  // 创建弹窗表单示例
+  const [form] = Form.useForm();
+
+  const handleClick = (type, rowData) => {
     setIsModalOpen(true)
     if(type === 'add') {
       setModalType(0)
     } else {
       setModalType(1)
+      // 编辑某一行数据时进行数据回显，进行一次深拷贝
+      const cloneData = JSON.parse(JSON.stringify(rowData))
+      cloneData.birth = dayjs(rowData.birth)
+      form.setFieldsValue(cloneData)
     }
     // console.log(type,"这是type类型");
   };
@@ -101,6 +131,7 @@ export default function User() {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    form.resetFields();
   };
 
   const getUserData = (listData) => {
@@ -145,7 +176,7 @@ export default function User() {
         cancelText="取消"
       >
         <Form
-          // form={form}
+          form={form}
           labelCol={{
             span: 6,
           }}
