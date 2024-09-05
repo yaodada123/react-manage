@@ -4,6 +4,10 @@
 ## 项目介绍
 本项目是基于React的**通用后台管理系统**，整体系统有数据可视化展示，数据基本的**增删改查**功能。项目使用 [Create React App](https://github.com/facebook/create-react-app)创建，主语言为JavaScript。在使用React框架过程中通过hook进行页面逻辑编写。后端接口数据使用Mock进行模拟。
 
+## 开源项目代码地址
+
+https://github.com/yaodada123/react-manage
+
 ## 技术栈
 
 - React 生态：React + React-Router + Redux + Axios + Babel + Webpack
