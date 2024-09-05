@@ -6,7 +6,7 @@
 
 ## 开源项目代码地址
 
-https://github.com/yaodada123/react-manage
+[https://github.com/yaodada123/react-manage](https://github.com/yaodada123/react-manage)
 
 ## 技术栈
 
