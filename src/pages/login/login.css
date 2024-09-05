@@ -1,3 +1,4 @@
+
 .login-container {
     width: 350px;
     border: 1px solid #eaeaea;
@@ -7,6 +8,8 @@
     border-radius: 15px;
     box-shadow: 0 0 25px #cac6c6;
     box-sizing: border-box;
+    background-image: url("../../../assets/wallhaven-9mjoy1.png");
+    background-size: cover;
 }
 
 .login-container .login_title {
