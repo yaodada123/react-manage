@@ -12,6 +12,7 @@ import CommonAside from "../components/commonAside/index"
 import ConmmonHeader from "../components/commonHeader";
 import CommonTag from "../components/commonTag/index";
 import { useSelector, useDispatch } from 'react-redux';
+import { RouterAuth } from '../router/routerAuth';
 
 const { Header, Sider, Content } = Layout;
 
@@ -22,7 +23,7 @@ export default function Main() {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
-    <div >
+    <RouterAuth>
       <Layout className="main-container">
         <CommonAside collapsed={collapsed} />
         <Layout>
@@ -43,6 +44,6 @@ export default function Main() {
         </Layout>
       </Layout>
       
-    </div>
+      </RouterAuth>
   );
 }

@@ -1,14 +1,11 @@
-import {
-  createBrowserRouter,
-  Navigate,
-} from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Main from "../pages/main";
 import Home from "../pages/home/home";
 import User from "../pages/user";
 import Mall from "../pages/mall";
 import PageOne from "../pages/otherpage/pageOne";
 import PageTwo from "../pages/otherpage/pageTwo";
-
+import Login from "../pages/login";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Navigate to="/home" replace={true} />
+        element: <Navigate to="/home" replace={true} />,
       },
       {
         path: "home",
@@ -25,11 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
-        element: <User />
+        element: <User />,
       },
       {
         path: "mall",
-        element: <Mall />
+        element: <Mall />,
       },
       {
         path: "other",
@@ -46,7 +43,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+  {
+    path: "/login",
+    Component: Login,
+  },
 ]);
 
 export default router;

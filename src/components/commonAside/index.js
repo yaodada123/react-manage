@@ -3,7 +3,7 @@ import { Button, Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
 import MenuConfig from "../../config";
 import {useNavigate} from 'react-router-dom';
-import {selectMenuList} from '../../store/reducers/tab'
+import {selectMenuList, setCurrentMenu} from '../../store/reducers/tab'
 import { useDispatch,  useSelector} from "react-redux"
 const { Header, Sider, Content } = Layout;
 
@@ -39,7 +39,6 @@ export default function CommonAside({collapsed}) {
     dispatch(selectMenuList(val))
   }
   const menuClick = (e) => {
-    // console.log(e, "这是e的数据");
     let data
     MenuConfig.forEach((item) => {
       // 找到当前的数据
@@ -59,9 +58,14 @@ export default function CommonAside({collapsed}) {
       name: data.name,
       label: data.label
     })
+    dispatch(setCurrentMenu({
+      path: data.path,
+      name: data.name,
+      label: data.label
+    }))
     navigate(e.key)
   }
-
+  // console.log(currentMenu, "currentMenu");
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <h3 className="app-name">{ collapsed ? '后台':'通用后台管理项目' }</h3>
