@@ -8,6 +8,10 @@
 
 [https://github.com/yaodada123/react-manage](https://github.com/yaodada123/react-manage)
 
+## 在线运行地址(可能需要magic才可访问)
+
+[https://react-manage-git-main-yaodada123s-projects.vercel.app/](https://react-manage-git-main-yaodada123s-projects.vercel.app/)
+
 ## 技术栈
 
 - React 生态：React + React-Router + Redux + Axios + Babel + Webpack
