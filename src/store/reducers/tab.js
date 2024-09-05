@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isCollapsed: false,
-  tabsList: [
+  isCollapsed: false, // 控制侧边栏展开与收缩
+  tabsList: [ // 传递tag值
     {
       path: '/',
       name: 'home',
       label: '首页'
     }
   ],
+  currentMenu: {}, // 记录选中的tag标签
 }
 
 export const collapsedSlice = createSlice({
@@ -26,12 +27,23 @@ export const collapsedSlice = createSlice({
           state.tabsList.push(val)
           console.log(state.tabsList, 'selectMenuList')
         }
-      } else {
-        state.currentMenu = null
+      } else if(val.name === 'home' && state.tabsList.length === 1) {
+        state.currentMenu = {}
       }
     },
+    closeTab: (state, { payload: val }) => { // 关闭选中的tag标签
+      let res = state.tabsList.findIndex(item => item.name === val.name)
+      state.tabsList.splice(res, 1);
+    },
+    setCurrentMenu: (state, {payload: val}) => { // 设置当前选中的tag
+      if (val.name === 'home') {
+        state.currentMenu = {}
+      } else {
+        state.currentMenu = val
+      }
+    }
   }
 })
 
-export const {changeCollapsed, selectMenuList} = collapsedSlice.actions;
+export const {changeCollapsed, selectMenuList, closeTab, setCurrentMenu} = collapsedSlice.actions;
 export default collapsedSlice.reducer;

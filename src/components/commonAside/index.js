@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import MenuConfig from "../../config";
 import {useNavigate} from 'react-router-dom';
 import {selectMenuList} from '../../store/reducers/tab'
-import { useDispatch } from "react-redux"
+import { useDispatch,  useSelector} from "react-redux"
 const { Header, Sider, Content } = Layout;
 
 const iconToElement = (name) => React.createElement(Icon[name]);
@@ -31,6 +31,8 @@ export default function CommonAside({collapsed}) {
   // console.log(collapsed, 'CommonAside');
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const currentMenu = useSelector(state => state.tabMenu.currentMenu); // 用于侧边栏高亮变化
+
 
   // 添加数据到store
   const setTabsList = (val) => {
@@ -66,7 +68,8 @@ export default function CommonAside({collapsed}) {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        defaultSelectedKeys={["/home"]}
+        selectedKeys={currentMenu.path || "/home"}
         items={items}
         onClick={menuClick}
       />
